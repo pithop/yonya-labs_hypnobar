@@ -1,113 +1,272 @@
+"use client";
+
+import { useRef, useEffect } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { NeonButton } from "@/components/ui/NeonButton";
+import { MultiStepForm } from "@/components/form/MultiStepForm";
+import { MapPin, Clock } from "lucide-react";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { HypnoticCanvas } from "@/components/ui/HypnoticCanvas";
+import { Preloader } from "@/components/ui/Preloader";
+
+// Utility for large text reveals
+const RevealText = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
+  return (
+    <div className="overflow-hidden">
+      <motion.div
+        initial={{ y: "100%" }}
+        whileInView={{ y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 1, ease: [0.76, 0, 0.24, 1], delay }}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+};
 
 export default function Home() {
+  const container = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"]
+  });
+
+  // Parallax values
+  const yHeroText = useTransform(scrollYProgress, [0, 1], [0, 800]);
+  const scaleHeroBg = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const yImage1 = useTransform(scrollYProgress, [0, 1], [0, -300]);
+  const yImage2 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+
+  // Remove generic scrollbar for custom cursor experience, but keep it normal for touch devices
+  useEffect(() => {
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    document.documentElement.style.cursor = "none";
+    document.body.style.cursor = "none";
+    return () => {
+      document.documentElement.style.cursor = "auto";
+      document.body.style.cursor = "auto";
+    };
+  }, []);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div ref={container} className="bg-[#050508] text-white selection:bg-primary/30 min-h-screen">
+      <Preloader />
+      <CustomCursor />
+
+      {/* HERO SECTION */}
+      <section className="relative h-screen flex flex-col justify-center overflow-hidden">
+        <HypnoticCanvas />
+        
+        <motion.div 
+          className="absolute inset-0 z-0 pointer-events-none"
+          style={{ scale: scaleHeroBg }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#050508]/50 to-[#050508] z-10" />
+        </motion.div>
+
+        <motion.div 
+          className="relative z-10 flex flex-col items-center justify-center text-center px-4"
+          style={{ y: yHeroText }}
+        >
+          <RevealText>
+            <h1 className="font-serif text-[18vw] md:text-[12vw] leading-[0.85] tracking-tighter uppercase font-black mix-blend-screen text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-300 to-gray-800">
+              HypnoBar
+            </h1>
+          </RevealText>
+          <RevealText delay={0.2}>
+            <p className="mt-6 md:mt-8 text-base md:text-3xl font-light tracking-[0.2em] md:tracking-[0.3em] uppercase text-primary drop-shadow-[0_0_20px_rgba(255,0,128,0.8)]">
+              L&apos;Élévation de la Nuit
+            </p>
+          </RevealText>
+          
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 3, duration: 1 }}
+            className="mt-16"
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            <a href="#concept">
+              <div className="w-[1px] h-24 bg-gradient-to-b from-primary to-transparent animate-pulse mx-auto interactive" />
+            </a>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* L'EXPÉRIENCE (PARALLAX EDITORIAL) */}
+      <section id="concept" className="relative py-40 px-6 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 relative">
+            
+            <div className="md:col-span-5 md:mt-40 z-10">
+              <RevealText>
+                <h2 className="font-serif text-5xl md:text-8xl font-bold mb-8 leading-none">
+                  Au Delà <br/><span className="text-secondary italic">du Réel</span>
+                </h2>
+              </RevealText>
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.5 }}
+              >
+                <p className="text-xl text-gray-400 font-light leading-relaxed max-w-md">
+                  Un espace où le design architectural rencontre l&apos;art immersif. L&apos;HypnoBar redéfinit le concept de club intimiste au cœur de Montpellier.
+                </p>
+                
+                <div className="mt-16 space-y-6">
+                  <div className="flex items-center gap-6 group">
+                    <div className="w-16 h-16 rounded-full border border-primary/30 flex items-center justify-center group-hover:border-primary transition-colors interactive">
+                      <MapPin className="text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-lg font-bold">4 Rue des Trésoriers de la Bourse</p>
+                      <p className="text-gray-500 text-sm">34000 Montpellier (Écusson)</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-6 group">
+                    <div className="w-16 h-16 rounded-full border border-secondary/30 flex items-center justify-center group-hover:border-secondary transition-colors interactive">
+                      <Clock className="text-secondary" />
+                    </div>
+                    <div>
+                      <p className="text-lg font-bold">Ouverture</p>
+                      <p className="text-gray-500 text-sm">Mercredi - Samedi • 18h - 01h</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="md:col-span-7 relative h-[60vh] md:h-[80vh] w-full mt-20 md:mt-0">
+              <motion.div 
+                className="absolute top-0 right-0 w-[90%] md:w-[80%] h-[80%] md:h-[70%] z-10"
+                style={{ y: yImage1 }}
+              >
+                <div className="w-full h-full relative overflow-hidden group">
+                  <Image src="/images/interior.png" alt="Interior" fill className="object-cover scale-110 group-hover:scale-100 transition-transform duration-[2s] ease-out" />
+                  <div className="absolute inset-0 bg-primary/10 mix-blend-overlay" />
+                </div>
+              </motion.div>
+              
+              <motion.div 
+                className="absolute bottom-0 left-0 w-[70%] md:w-[60%] h-[60%] md:h-[50%] z-20"
+                style={{ y: yImage2 }}
+              >
+                <div className="w-full h-full relative overflow-hidden group shadow-[0_30px_60px_rgba(0,0,0,0.8)] border border-white/5">
+                  <Image src="/images/cocktail.png" alt="Cocktail" fill className="object-cover scale-110 group-hover:scale-100 transition-transform duration-[2s] ease-out" />
+                </div>
+              </motion.div>
+            </div>
+
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+      {/* LA CARTE (OVERLAPPING CARDS) */}
+      <section className="py-40 relative border-t border-white/5 bg-black">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="text-center mb-20 md:mb-32">
+            <RevealText>
+              <h2 className="font-serif text-4xl md:text-9xl text-white/5 uppercase font-black tracking-widest absolute left-1/2 -translate-x-1/2 top-4 md:top-10 pointer-events-none whitespace-nowrap">
+                Haute Mixologie
+              </h2>
+            </RevealText>
+            <RevealText delay={0.2}>
+              <h3 className="font-serif text-4xl md:text-7xl font-bold relative z-10 mt-12 md:mt-20">L&apos;Art du Goût</h3>
+            </RevealText>
+          </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+          <div className="grid md:grid-cols-2 gap-20">
+            <motion.div 
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1 }}
+              className="relative group"
+            >
+              <div className="aspect-[4/5] relative overflow-hidden mb-8">
+                <Image src="/images/cocktail.png" alt="Drinks" fill className="object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale group-hover:grayscale-0" />
+              </div>
+              <h4 className="text-3xl font-serif text-primary mb-6">Élixirs & Spiritueux</h4>
+              <ul className="space-y-4 text-xl font-light">
+                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-primary transition-colors"><span>Signature L&apos;Hypnotique</span><span>10 €</span></li>
+                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-primary transition-colors"><span>Vins de Domaine</span><span>Dès 6 €</span></li>
+              </ul>
+            </motion.div>
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+            <motion.div 
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="relative group md:mt-32"
+            >
+              <div className="aspect-[4/5] relative overflow-hidden mb-8">
+                <Image src="/images/food.png" alt="Food" fill className="object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale group-hover:grayscale-0" />
+              </div>
+              <h4 className="text-3xl font-serif text-secondary mb-6">Mets Délicats</h4>
+              <ul className="space-y-4 text-xl font-light">
+                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-secondary transition-colors"><span>Planche Premium</span><span>23 €</span></li>
+                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-secondary transition-colors"><span>Huîtres de Bouzigues</span><span>14 €</span></li>
+              </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
+      {/* ANIMATIONS (FULL WIDTH SCROLL) */}
+      <section className="py-20 md:py-40 relative">
+        <div className="sticky top-0 h-[50vh] md:h-screen flex flex-col justify-center items-center overflow-hidden z-0">
+          <Image src="/images/dj-set.png" alt="Ambiance" fill className="object-cover opacity-20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050508] via-transparent to-[#050508]" />
+        </div>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+        <div className="relative z-10 max-w-[1000px] mx-auto px-6 -mt-[40vh] md:-mt-[80vh] space-y-[20vh] md:space-y-[40vh] pb-20 md:pb-40">
+          {[
+            { title: "DJ Set Exclusif", desc: "Système son L-Acoustics. Résidences locales et guests internationaux.", color: "text-primary", img: "/images/dj-set.png" },
+            { title: "Karaoké Privatif", desc: "Des classiques intemporels. La scène est à vous.", color: "text-secondary", img: "/images/karaoke.png" },
+            { title: "Blind Test", desc: "Compétition bon enfant. Remportez la tournée.", color: "text-white", img: "/images/blind-test.png" }
+          ].map((item, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.8 }}
+              className="flex flex-col md:flex-row items-center gap-8 md:gap-12 bg-black/80 backdrop-blur-xl p-6 md:p-8 border border-white/5 interactive shadow-2xl"
+            >
+              <div className="w-full md:w-1/2 aspect-video relative overflow-hidden rounded-md">
+                <Image src={item.img} alt={item.title} fill className="object-cover" />
+              </div>
+              <div className="w-full md:w-1/2 text-center md:text-left">
+                <h3 className={`font-serif text-3xl md:text-4xl mb-4 ${item.color}`}>{item.title}</h3>
+                <p className="text-lg md:text-xl text-gray-400 font-light">{item.desc}</p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* PRIVATISATION */}
+      <section id="reserver" className="py-40 relative bg-black border-t border-white/10 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-[1000px] h-[500px] bg-primary/20 blur-[150px] rounded-full mix-blend-screen pointer-events-none" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="text-center mb-16 md:mb-24">
+            <RevealText>
+              <h2 className="font-serif text-4xl md:text-8xl font-bold text-white mb-6">Privatisation</h2>
+            </RevealText>
+            <RevealText delay={0.2}>
+              <p className="text-lg md:text-2xl text-gray-400 font-light max-w-2xl mx-auto">L&apos;HypnoBar devient le vôtre. Réservez l&apos;espace pour une expérience inoubliable.</p>
+            </RevealText>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <MultiStepForm />
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
