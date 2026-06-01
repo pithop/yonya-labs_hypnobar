@@ -187,7 +187,7 @@ export default function Home() {
       </section>
 
       {/* LA CARTE (OVERLAPPING CARDS) */}
-      <section className="py-40 relative border-t border-white/5 bg-black">
+      <section id="menu" className="py-40 relative border-t border-white/5 bg-black">
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="text-center mb-20 md:mb-32">
             <RevealText>
