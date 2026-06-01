@@ -58,8 +58,10 @@ export function GoogleReviewsMarquee() {
         {marqueeItems.map((review, i) => (
           <div 
             key={i} 
-            className="w-[300px] md:w-[400px] flex-shrink-0 p-6 rounded-2xl glass border border-white/10 flex flex-col gap-4 relative overflow-hidden group hover:border-primary/50 transition-colors"
+            className="w-[300px] md:w-[400px] flex-shrink-0 p-8 rounded-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex flex-col gap-4 relative overflow-hidden group hover:border-primary/50 hover:shadow-[0_0_30px_rgba(255,0,128,0.15)] transition-all duration-500"
           >
+            {/* Holographic sweep effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 group-hover:translate-x-full transition-all duration-1000 transform -translate-x-full pointer-events-none z-0" />
             <div className="absolute -right-4 -top-4 opacity-5 group-hover:opacity-10 transition-opacity">
               <Quote size={80} />
             </div>
@@ -70,22 +72,22 @@ export function GoogleReviewsMarquee() {
               ))}
             </div>
             
-            <p className="text-gray-300 font-light text-sm md:text-base whitespace-normal line-clamp-4">
+            <p className="text-gray-300 font-serif italic text-base md:text-lg whitespace-normal line-clamp-4 relative z-10 leading-relaxed">
               &quot;{review.text}&quot;
             </p>
             
-            <div className="mt-auto pt-4 flex items-center gap-3 border-t border-white/10">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-sm">
+            <div className="mt-auto pt-6 flex items-center gap-3 border-t border-white/10 relative z-10">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-sm shadow-[0_0_15px_rgba(255,0,128,0.3)]">
                 {review.name.charAt(0)}
               </div>
               <div>
-                <p className="font-bold text-sm">{review.name}</p>
+                <p className="font-bold text-sm tracking-wider">{review.name}</p>
                 {review.role && (
-                  <p className="text-xs text-gray-500">{review.role}</p>
+                  <p className="text-xs text-primary font-medium">{review.role}</p>
                 )}
               </div>
-              <div className="ml-auto text-xs font-medium text-gray-400 flex items-center gap-1">
-                Google <span className="text-xl">G</span>
+              <div className="ml-auto text-xs font-bold text-gray-500 flex items-center gap-1 uppercase tracking-widest">
+                Google <span className="text-xl text-white">G</span>
               </div>
             </div>
           </div>

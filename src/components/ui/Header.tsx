@@ -11,7 +11,7 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
@@ -32,18 +32,23 @@ export function Header() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-black/70 backdrop-blur-md border-b border-white/5 py-4" : "bg-transparent py-6"
-        }`}
-      >
-        <div className="container mx-auto px-6 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-50 md:top-6 md:px-6 pointer-events-none flex justify-center">
+        <div 
+          className={`pointer-events-auto transition-all duration-500 w-full md:max-w-5xl md:rounded-full border-b md:border border-white/10 flex items-center justify-between px-6 ${
+            isScrolled 
+              ? "bg-[#050508]/80 backdrop-blur-2xl py-3 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.8)]" 
+              : "bg-transparent md:bg-white/5 md:backdrop-blur-xl py-5 md:py-4"
+          }`}
+        >
           {/* Logo */}
           <div 
-            className="font-serif text-2xl font-bold tracking-widest uppercase cursor-pointer interactive"
+            className="font-serif text-xl md:text-2xl font-bold tracking-widest uppercase cursor-pointer interactive group flex items-center gap-2"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            Hypno<span className="text-primary">Bar</span>
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
+              <span className="text-white text-xs font-sans">H</span>
+            </div>
+            <span>Hypno<span className="text-primary group-hover:drop-shadow-[0_0_8px_rgba(255,0,128,0.8)] transition-all">Bar</span></span>
           </div>
 
           {/* Desktop Navigation */}
@@ -52,13 +57,13 @@ export function Header() {
               <button
                 key={link.id}
                 onClick={() => scrollTo(link.id)}
-                className="text-sm uppercase tracking-widest text-gray-300 hover:text-white transition-colors interactive font-bold"
+                className="text-xs uppercase tracking-[0.2em] text-gray-400 hover:text-white transition-colors interactive font-medium"
               >
                 {link.name}
               </button>
             ))}
-            <div onClick={() => scrollTo("reserver")}>
-              <NeonButton variant="pink" className="py-2 px-6 text-xs">
+            <div onClick={() => scrollTo("reserver")} className="ml-4">
+              <NeonButton variant="pink" className="py-2.5 px-6 text-xs uppercase tracking-widest font-bold">
                 Privatiser
               </NeonButton>
             </div>
@@ -66,7 +71,7 @@ export function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white p-2"
+            className="md:hidden text-white p-2 interactive"
             onClick={() => setIsMobileMenuOpen(true)}
             aria-label="Ouvrir le menu"
           >
@@ -79,44 +84,57 @@ export function Header() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: "-100%" }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: "-100%" }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
             transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-[#050508] flex flex-col"
+            className="fixed inset-0 z-[100] bg-[#050508]/95 backdrop-blur-3xl flex flex-col"
           >
             <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <div className="font-serif text-2xl font-bold tracking-widest uppercase">
+              <div className="font-serif text-2xl font-bold tracking-widest uppercase flex items-center gap-2">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                  <span className="text-white text-xs font-sans">H</span>
+                </div>
                 Hypno<span className="text-primary">Bar</span>
               </div>
               <button
-                className="text-white p-2"
+                className="text-white p-2 bg-white/5 rounded-full"
                 onClick={() => setIsMobileMenuOpen(false)}
                 aria-label="Fermer le menu"
               >
-                <X size={28} />
+                <X size={24} />
               </button>
             </div>
             
-            <div className="flex-grow flex flex-col items-center justify-center gap-12 p-6">
-              {navLinks.map((link) => (
-                <button
+            <div className="flex-grow flex flex-col items-center justify-center gap-10 p-6">
+              {navLinks.map((link, i) => (
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * i }}
                   key={link.id}
                   onClick={() => scrollTo(link.id)}
-                  className="text-3xl font-serif text-white hover:text-primary transition-colors"
+                  className="text-4xl font-serif text-white hover:text-primary transition-colors italic"
                 >
                   {link.name}
-                </button>
+                </motion.button>
               ))}
-              <div className="w-full max-w-sm mt-8" onClick={() => scrollTo("reserver")}>
+              
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="w-full max-w-xs mt-8" 
+                onClick={() => scrollTo("reserver")}
+              >
                 <NeonButton variant="pink" fullWidth className="py-4 text-lg">
                   Privatiser l&apos;HypnoBar
                 </NeonButton>
-              </div>
+              </motion.div>
             </div>
             
             {/* Ambient Mobile Background Glow */}
-            <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/20 to-transparent pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
           </motion.div>
         )}
       </AnimatePresence>

@@ -86,8 +86,11 @@ export default function RootLayout({
                     Le club le plus exclusif de Montpellier. Haute mixologie, design avant-gardiste et expériences sur-mesure.
                   </p>
                   <div className="flex gap-4">
-                    <a href="#" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-primary hover:text-primary transition-colors font-bold text-sm">
+                    <a href="https://www.instagram.com/hypnobar34/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-primary hover:text-primary transition-colors font-bold text-sm">
                       IG
+                    </a>
+                    <a href="https://www.facebook.com/p/HypnoBar-61561493402474/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-[#1877F2] hover:text-[#1877F2] transition-colors font-bold text-sm">
+                      FB
                     </a>
                   </div>
                 </div>
@@ -105,7 +108,7 @@ export default function RootLayout({
                     </li>
                     <li className="flex items-center gap-3">
                       <Mail size={16} className="text-secondary shrink-0" />
-                      <span>contact@hypnobar.fr</span>
+                      <span>hypnobar34@gmail.com</span>
                     </li>
                   </ul>
                 </div>

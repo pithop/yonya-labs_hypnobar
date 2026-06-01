@@ -228,10 +228,12 @@ export default function Home() {
               <div className="aspect-[4/5] relative overflow-hidden mb-8">
                 <Image src="/images/food.png" alt="Food" fill className="object-cover transition-transform duration-1000 group-hover:scale-105 filter grayscale group-hover:grayscale-0" />
               </div>
-              <h4 className="text-3xl font-serif text-secondary mb-6">Mets Délicats</h4>
-              <ul className="space-y-4 text-xl font-light">
-                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-secondary transition-colors"><span>Planche Premium</span><span>23 €</span></li>
-                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-secondary transition-colors"><span>Huîtres de Bouzigues</span><span>14 €</span></li>
+              <h4 className="text-3xl font-serif text-secondary mb-6">Food & Traiteur</h4>
+              <ul className="space-y-4 text-lg md:text-xl font-light">
+                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-secondary transition-colors"><span>Apéro Dînatoire</span><span>Sur devis</span></li>
+                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-secondary transition-colors"><span>Paella Géante</span><span>Sur devis</span></li>
+                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-secondary transition-colors"><span>Barbe à Papa</span><span>Sur devis</span></li>
+                <li className="flex justify-between border-b border-white/10 pb-4 interactive hover:text-secondary transition-colors"><span>Stand Hot Dog</span><span>Sur devis</span></li>
               </ul>
             </motion.div>
           </div>
@@ -289,7 +291,24 @@ export default function Home() {
             </RevealText>
           </div>
 
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto relative">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="mb-10 text-center relative"
+            >
+              <div className="inline-block relative">
+                <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
+                <div className="relative border border-primary/50 bg-black/50 backdrop-blur-md px-6 py-4 rounded-full flex items-center gap-3">
+                  <span className="text-2xl">🎂</span>
+                  <span className="font-serif text-lg md:text-xl text-primary font-bold tracking-widest uppercase">
+                    Gâteau offert (Minimum 10 personnes)
+                  </span>
+                </div>
+              </div>
+            </motion.div>
+
             <MultiStepForm />
           </div>
         </div>
