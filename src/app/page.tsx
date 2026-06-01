@@ -9,6 +9,8 @@ import { MapPin, Clock } from "lucide-react";
 import { CustomCursor } from "@/components/ui/CustomCursor";
 import { HypnoticCanvas } from "@/components/ui/HypnoticCanvas";
 import { Preloader } from "@/components/ui/Preloader";
+import { GoogleReviewsMarquee } from "@/components/ui/GoogleReviewsMarquee";
+import { LocationSection } from "@/components/ui/LocationSection";
 
 // Utility for large text reveals
 const RevealText = ({ children, delay = 0 }: { children: React.ReactNode, delay?: number }) => {
@@ -247,6 +249,10 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* PREUVE SOCIALE & LOCALISATION */}
+      <GoogleReviewsMarquee />
+      <LocationSection />
 
       {/* PRIVATISATION */}
       <section id="reserver" className="py-40 relative bg-black border-t border-white/10 overflow-hidden">

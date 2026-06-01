@@ -33,6 +33,29 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BarOrPub",
+  "name": "HypnoBar Montpellier",
+  "image": "https://hypnobar-demo.vercel.app/images/hero-bg.png",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4 Rue des Trésoriers de la Bourse",
+    "addressLocality": "Montpellier",
+    "postalCode": "34000",
+    "addressCountry": "FR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 43.609753,
+    "longitude": 3.8765323
+  },
+  "url": "https://hypnobar-demo.vercel.app",
+  "telephone": "+33467000000",
+  "priceRange": "$$$",
+  "servesCuisine": "Cocktails & Tapas Premium"
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,6 +63,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className="dark">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={clsx(inter.variable, playfair.variable, "font-sans bg-background text-white min-h-screen flex flex-col")}>
         <SmoothScroll>
           <Header />
