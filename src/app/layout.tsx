@@ -77,61 +77,52 @@ export default function RootLayout({
             {children}
           </main>
 
-          <footer className="glass py-16 border-t border-white/5 relative z-50 bg-[#050508] overflow-hidden">
+          <footer className="relative py-24 border-t border-white/5 bg-[#050508] overflow-hidden mt-20">
             <div className="container mx-auto px-6 relative z-10">
-              <div className="grid md:grid-cols-4 gap-12 mb-12">
-                <div className="col-span-1 md:col-span-2">
-                  <h3 className="font-serif text-3xl font-bold text-primary mb-6 drop-shadow-[0_0_10px_rgba(255,0,128,0.5)]">HYPNOBAR</h3>
-                  <p className="text-gray-400 max-w-sm mb-6">
-                    Le club le plus exclusif de Montpellier. Haute mixologie, design avant-gardiste et expériences sur-mesure.
+              <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-16 mb-20">
+                <div className="text-center md:text-left flex-1 relative group">
+                  <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                  <h3 className="font-serif text-5xl md:text-8xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 tracking-tighter uppercase mb-6 drop-shadow-2xl">
+                    HYPNOBAR
+                  </h3>
+                  <p className="text-gray-400 max-w-md mx-auto md:mx-0 text-lg font-light leading-relaxed">
+                    Le sanctuaire nocturne de l&apos;Écusson. Haute mixologie et expériences sur-mesure.
                   </p>
-                  <div className="flex gap-4">
-                    <a href="https://www.instagram.com/hypnobar34/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-primary hover:text-primary transition-colors font-bold text-sm">
-                      IG
-                    </a>
-                    <a href="https://www.facebook.com/p/HypnoBar-61561493402474/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:border-[#1877F2] hover:text-[#1877F2] transition-colors font-bold text-sm">
-                      FB
-                    </a>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-8 md:gap-16 w-full md:w-auto">
+                  <div className="text-center md:text-right">
+                    <h4 className="font-bold uppercase tracking-[0.2em] text-xs mb-8 text-white/50">Contact</h4>
+                    <ul className="space-y-5 text-gray-300 font-light">
+                      <li className="hover:text-white transition-colors duration-300">4 Rue des Trésoriers de la Bourse<br/>34000 Montpellier</li>
+                      <li><a href="tel:+33974641784" className="hover:text-primary transition-colors duration-300 inline-block">+33 9 74 64 17 84</a></li>
+                      <li><a href="mailto:hypnobar34@gmail.com" className="hover:text-primary transition-colors duration-300 inline-block">hypnobar34@gmail.com</a></li>
+                    </ul>
                   </div>
-                </div>
 
-                <div>
-                  <h4 className="font-bold uppercase tracking-widest text-sm mb-6 text-white">Contact</h4>
-                  <ul className="space-y-4 text-gray-400 text-sm">
-                    <li className="flex items-start gap-3">
-                      <MapPin size={16} className="text-secondary shrink-0 mt-0.5" />
-                      <span>4 Rue des Trésoriers de la Bourse<br/>34000 Montpellier</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Phone size={16} className="text-secondary shrink-0" />
-                      <span>04 67 XX XX XX</span>
-                    </li>
-                    <li className="flex items-center gap-3">
-                      <Mail size={16} className="text-secondary shrink-0" />
-                      <span>hypnobar34@gmail.com</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h4 className="font-bold uppercase tracking-widest text-sm mb-6 text-white">Légal</h4>
-                  <ul className="space-y-4 text-gray-400 text-sm">
-                    <li><a href="#" className="hover:text-white transition-colors">Mentions Légales</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Politique de Confidentialité</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">CGV Privatisation</a></li>
-                    <li><a href="#" className="hover:text-white transition-colors">Gestion des Cookies</a></li>
-                  </ul>
+                  <div className="text-center md:text-right">
+                    <h4 className="font-bold uppercase tracking-[0.2em] text-xs mb-8 text-white/50">Légal & Social</h4>
+                    <ul className="space-y-5 text-gray-300 font-light">
+                      <li><a href="https://www.instagram.com/hypnobar34/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors duration-300 flex items-center justify-center md:justify-end gap-2">Instagram <span className="text-xs text-primary/50">↗</span></a></li>
+                      <li><a href="https://www.facebook.com/p/HypnoBar-61561493402474/" target="_blank" rel="noopener noreferrer" className="hover:text-[#1877F2] transition-colors duration-300 flex items-center justify-center md:justify-end gap-2">Facebook <span className="text-xs text-[#1877F2]/50">↗</span></a></li>
+                      <li><a href="#" className="hover:text-white transition-colors duration-300">CGV & Mentions</a></li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 uppercase tracking-wider">
-                <p>© 2026 HypnoBar Montpellier. Tous droits réservés.</p>
-                <p>L&apos;abus d&apos;alcool est dangereux pour la santé, à consommer avec modération.</p>
+              <div className="pt-10 border-t border-white/5 flex flex-col items-center justify-center gap-6 text-center relative z-20">
+                <p className="text-[10px] md:text-xs text-gray-500 uppercase tracking-[0.3em] font-medium">
+                  L&apos;abus d&apos;alcool est dangereux pour la santé, à consommer avec modération.
+                </p>
+                <p className="text-xs text-gray-600 uppercase tracking-widest">
+                  © 2026 HypnoBar Montpellier. Tous droits réservés.
+                </p>
               </div>
             </div>
             
             {/* Ambient Footer Glow */}
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-primary/5 blur-[150px] pointer-events-none" />
+            <div className="absolute bottom-[-20%] left-1/2 -translate-x-1/2 w-[80vw] h-[300px] bg-primary/10 blur-[150px] pointer-events-none rounded-[100%]" />
           </footer>
         </SmoothScroll>
 
