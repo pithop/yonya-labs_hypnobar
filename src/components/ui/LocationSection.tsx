@@ -53,8 +53,22 @@ export function LocationSection() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative h-[400px] md:h-[500px] w-full rounded-2xl overflow-hidden glass border border-white/10 group"
           >
-            {/* Simulation d'une carte haut de gamme avec un pin pulsant */}
-            <div className="absolute inset-0 bg-[#0A0A10] flex items-center justify-center">
+            {/* Vraie carte OpenStreetMap avec filtre Dark Mode */}
+            <div className="absolute inset-0 bg-[#0A0A10]">
+              <iframe 
+                width="100%" 
+                height="100%" 
+                frameBorder="0" 
+                scrolling="no" 
+                marginHeight={0} 
+                marginWidth={0} 
+                src="https://www.openstreetmap.org/export/embed.html?bbox=3.8705323%2C43.606753%2C3.8825323%2C43.612753&amp;layer=mapnik" 
+                className="w-full h-full filter invert-[90%] hue-rotate-[180deg] contrast-[120%] opacity-50 grayscale"
+                title="Carte HypnoBar"
+              />
+            </div>
+            
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="relative">
                 {/* Onde de choc */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-primary/20 rounded-full animate-ping" />

@@ -96,6 +96,27 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* MANIFESTO / SAFE SPACE */}
+      <section className="py-20 md:py-32 relative bg-black border-y border-white/5">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <RevealText>
+            <h2 className="font-serif text-3xl md:text-5xl font-bold mb-8 text-white">
+              Un Sanctuaire <span className="text-primary italic">Nocturne</span>
+            </h2>
+          </RevealText>
+          <RevealText delay={0.2}>
+            <p className="text-xl md:text-3xl font-light text-gray-400 leading-relaxed">
+              Où l&apos;élégance rencontre la liberté absolue. L&apos;HypnoBar est un <strong className="text-white">Safe Space inclusif</strong> et bienveillant. Que vous veniez pour l&apos;amour du bon son, des cocktails pointus ou simplement pour être vous-même : 
+            </p>
+          </RevealText>
+          <RevealText delay={0.4}>
+            <p className="mt-8 text-2xl md:text-4xl font-serif text-secondary italic">
+              Venez chic, venez vous-même.
+            </p>
+          </RevealText>
+        </div>
+      </section>
+
       {/* L'EXPÉRIENCE (PARALLAX EDITORIAL) */}
       <section id="concept" className="relative py-40 px-6 overflow-hidden">
         <div className="max-w-[1400px] mx-auto">
