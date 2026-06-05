@@ -8,7 +8,6 @@ import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { MapPin, Mail, Phone } from "lucide-react";
-import Image from "next/image";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
@@ -83,9 +82,7 @@ export default function RootLayout({
               <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-16 mb-20">
                 <div className="text-center md:text-left flex-1 relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                  <div className="relative w-32 h-32 md:w-40 md:h-40 mix-blend-screen mb-6">
-                    <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" />
-                  </div>
+                  <img src="/images/logo.svg" alt="HypnoBar Logo" className="w-32 md:w-40 h-auto mb-6 mx-auto md:mx-0" />
                   <p className="text-gray-400 max-w-md mx-auto md:mx-0 text-lg font-light leading-relaxed">
                     Le sanctuaire nocturne de l&apos;Écusson. Haute mixologie et expériences sur-mesure.
                   </p>

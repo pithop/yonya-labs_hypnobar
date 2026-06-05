@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NeonButton } from "@/components/ui/NeonButton";
-import Image from "next/image";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -43,12 +42,10 @@ export function Header() {
         >
           {/* Logo */}
           <div 
-            className="cursor-pointer interactive group flex items-center h-12 relative"
+            className="cursor-pointer interactive group flex items-center"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <div className="relative w-14 h-14 md:w-16 md:h-16 mix-blend-screen">
-              <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" priority />
-            </div>
+            <img src="/images/logo.svg" alt="HypnoBar" className="h-12 md:h-14 w-auto drop-shadow-[0_0_12px_rgba(155,89,232,0.4)] group-hover:drop-shadow-[0_0_20px_rgba(255,0,128,0.6)] transition-all duration-500" />
           </div>
 
           {/* Desktop Navigation */}
@@ -91,9 +88,7 @@ export function Header() {
             className="fixed inset-0 z-[100] bg-[#050508]/95 backdrop-blur-3xl flex flex-col"
           >
             <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <div className="relative w-14 h-14 mix-blend-screen">
-                <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" />
-              </div>
+              <img src="/images/logo.svg" alt="HypnoBar" className="h-14 w-auto" />
               <button
                 className="text-white p-2 bg-white/5 rounded-full"
                 onClick={() => setIsMobileMenuOpen(false)}
