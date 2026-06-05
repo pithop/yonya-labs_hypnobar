@@ -46,7 +46,7 @@ export function Header() {
             className="cursor-pointer interactive group flex items-center h-12 relative"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <div className="relative w-32 h-10 md:w-40 md:h-12 overflow-hidden mix-blend-screen drop-shadow-[0_0_15px_rgba(255,0,128,0.3)]">
+            <div className="relative w-14 h-14 md:w-16 md:h-16 mix-blend-screen">
               <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" priority />
             </div>
           </div>
@@ -91,7 +91,7 @@ export function Header() {
             className="fixed inset-0 z-[100] bg-[#050508]/95 backdrop-blur-3xl flex flex-col"
           >
             <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <div className="relative w-32 h-10 overflow-hidden mix-blend-screen">
+              <div className="relative w-14 h-14 mix-blend-screen">
                 <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" />
               </div>
               <button

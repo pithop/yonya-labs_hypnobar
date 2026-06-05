@@ -83,7 +83,7 @@ export default function RootLayout({
               <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-16 mb-20">
                 <div className="text-center md:text-left flex-1 relative group">
                   <div className="absolute -inset-4 bg-gradient-to-r from-primary/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                  <div className="relative w-48 h-16 md:w-80 md:h-24 mix-blend-screen drop-shadow-[0_0_15px_rgba(255,0,128,0.5)] mb-6">
+                  <div className="relative w-32 h-32 md:w-40 md:h-40 mix-blend-screen mb-6">
                     <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" />
                   </div>
                   <p className="text-gray-400 max-w-md mx-auto md:mx-0 text-lg font-light leading-relaxed">

@@ -74,7 +74,7 @@ export default function Home() {
         >
           <RevealText>
             <h1 className="sr-only">HypnoBar</h1>
-            <div className="relative w-[80vw] h-[25vh] md:w-[50vw] md:h-[35vh] mix-blend-screen drop-shadow-[0_0_30px_rgba(255,0,128,0.4)]">
+            <div className="relative w-[60vw] h-[60vw] md:w-[35vw] md:h-[35vw] max-w-[400px] max-h-[400px] mix-blend-screen mx-auto">
               <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" priority />
             </div>
           </RevealText>
