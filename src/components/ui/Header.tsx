@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NeonButton } from "@/components/ui/NeonButton";
+import Image from "next/image";
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -42,13 +43,12 @@ export function Header() {
         >
           {/* Logo */}
           <div 
-            className="font-serif text-xl md:text-2xl font-bold tracking-widest uppercase cursor-pointer interactive group flex items-center gap-2"
+            className="cursor-pointer interactive group flex items-center h-12 relative"
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center opacity-80 group-hover:opacity-100 transition-opacity">
-              <span className="text-white text-xs font-sans">H</span>
+            <div className="relative w-32 h-10 md:w-40 md:h-12 overflow-hidden mix-blend-screen drop-shadow-[0_0_15px_rgba(255,0,128,0.3)]">
+              <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" priority />
             </div>
-            <span>Hypno<span className="text-primary group-hover:drop-shadow-[0_0_8px_rgba(255,0,128,0.8)] transition-all">Bar</span></span>
           </div>
 
           {/* Desktop Navigation */}
@@ -91,11 +91,8 @@ export function Header() {
             className="fixed inset-0 z-[100] bg-[#050508]/95 backdrop-blur-3xl flex flex-col"
           >
             <div className="flex items-center justify-between p-6 border-b border-white/10">
-              <div className="font-serif text-2xl font-bold tracking-widest uppercase flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                  <span className="text-white text-xs font-sans">H</span>
-                </div>
-                Hypno<span className="text-primary">Bar</span>
+              <div className="relative w-32 h-10 overflow-hidden mix-blend-screen">
+                <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" />
               </div>
               <button
                 className="text-white p-2 bg-white/5 rounded-full"

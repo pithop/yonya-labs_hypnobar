@@ -73,9 +73,10 @@ export default function Home() {
           style={{ y: yHeroText }}
         >
           <RevealText>
-            <h1 className="font-serif text-[18vw] md:text-[12vw] leading-[0.85] tracking-tighter uppercase font-black mix-blend-screen text-transparent bg-clip-text bg-gradient-to-br from-white via-gray-300 to-gray-800">
-              HypnoBar
-            </h1>
+            <h1 className="sr-only">HypnoBar</h1>
+            <div className="relative w-[80vw] h-[25vh] md:w-[50vw] md:h-[35vh] mix-blend-screen drop-shadow-[0_0_30px_rgba(255,0,128,0.4)]">
+              <Image src="/images/logo.jpg" alt="HypnoBar Logo" fill className="object-contain" priority />
+            </div>
           </RevealText>
           <RevealText delay={0.2}>
             <p className="mt-6 md:mt-8 text-base md:text-3xl font-light tracking-[0.2em] md:tracking-[0.3em] uppercase text-primary drop-shadow-[0_0_20px_rgba(255,0,128,0.8)]">

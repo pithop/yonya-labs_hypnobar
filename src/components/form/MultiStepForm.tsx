@@ -24,21 +24,42 @@ export function MultiStepForm() {
   const nextStep = () => setStep((s) => Math.min(s + 1, 4));
   const prevStep = () => setStep((s) => Math.max(s - 1, 1));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSubmitting(false);
-      
-      // Afficher la notification ultra-premium
-      toast.success("Demande de privatisation envoyée", {
-        description: "L'équipe de l'HypnoBar vous recontactera sous 24h.",
+    
+    try {
+      const response = await fetch("https://formspree.io/f/mlgkdqop", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          Type_Evenement: eventType,
+          Taille_Groupe: groupSize,
+          Date: date,
+          Option_DJ: options.dj ? "Oui" : "Non",
+          Option_Traiteur: options.traiteur ? "Oui" : "Non",
+          Nom: contact.name,
+          Email: contact.email,
+          Telephone: contact.phone
+        })
       });
-      
-      // On peut aussi garder l'écran de succès pour le flow complet
-      setIsSuccess(true);
-    }, 1500);
+
+      setIsSubmitting(false);
+
+      if (response.ok) {
+        toast.success("Demande envoyée", {
+          description: "L'équipe de l'HypnoBar vous recontactera très vite.",
+        });
+        setIsSuccess(true);
+      } else {
+        toast.error("Erreur", { description: "Une erreur est survenue lors de l'envoi." });
+      }
+    } catch (error) {
+      setIsSubmitting(false);
+      toast.error("Erreur", { description: "Impossible de joindre le serveur." });
+    }
   };
 
   if (isSuccess) {
